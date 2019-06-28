@@ -1,0 +1,41 @@
+/*
+ * 201_03_082.c
+ *
+ * Created: 2018-12-20 ¿ÀÈÄ 1:45:32
+ * Author: Administrator
+ */
+
+#include <delay.h>
+#include <mega128a.h>
+
+char seg_pat[16]={0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xd8, 0x80, 0x98, 0x88, 0x83, 0xc6, 0xa1, 0x86, 0x8e};
+
+interrupt [TIM2_OVF] void timer2_ovf (void)
+{
+     PORTB=0x00;
+     PORTA=0x00;
+     delay_ms(2000);
+     PORTA=0xff;
+     TCNT2=251;
+}
+
+    void init(void)
+    {
+    TCCR2=0x06;
+    TCNT2=251;
+    TIMSK =0x40;
+    
+    PORTA=0xff; DDRA=0xff;
+    PORTB=0xff; DDRB=0xff;
+    PORTD=0xff; DDRD=0x00;
+    
+    }
+    
+void main(void)
+{
+init();
+    POTA=0xff;
+    SREG |= 0x80;
+    
+    while(1);
+}

@@ -1,0 +1,38 @@
+/*
+ * 201_03_053.c
+ *
+ * Created: 2018-11-01 ¿ÀÀü 11:53:28
+ * Author: Administrator
+ */
+
+#include <mega128a.h>
+#include <delay.h>
+
+#asm
+.equ __lcd_port=0x15
+#endasm
+
+#include <lcd.h>
+
+
+void main(void)
+{
+    char buff[17] = "AVR Atmega128";
+    
+    PORTC = 0xff;
+    DDRC = 0xff;
+    
+    lcd_init(16);
+    lcd_gotoxy(0,0);
+    
+    delay_us(500);
+    lcd_puts(buff);
+    
+    lcd_gotoxy(0,1);
+    lcd_puts("ROBOT SYSTEM");
+while (1)
+    {
+    // Please write your application code here
+
+    }
+}

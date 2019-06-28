@@ -1,0 +1,220 @@
+;#include <mega128a.h>   //atmega128 헤더파일
+;PCODE: $00000000 VOL: 0
+	#ifndef __SLEEP_DEFINED__
+;PCODE: $00000001 VOL: 0
+	#define __SLEEP_DEFINED__
+;PCODE: $00000002 VOL: 0
+	.EQU __se_bit=0x20
+;PCODE: $00000003 VOL: 0
+	.EQU __sm_mask=0x1C
+;PCODE: $00000004 VOL: 0
+	.EQU __sm_powerdown=0x10
+;PCODE: $00000005 VOL: 0
+	.EQU __sm_powersave=0x18
+;PCODE: $00000006 VOL: 0
+	.EQU __sm_standby=0x14
+;PCODE: $00000007 VOL: 0
+	.EQU __sm_ext_standby=0x1C
+;PCODE: $00000008 VOL: 0
+	.EQU __sm_adc_noise_red=0x08
+;PCODE: $00000009 VOL: 0
+	.SET power_ctrl_reg=mcucr
+;PCODE: $0000000A VOL: 0
+	#endif
+;PCODE: $0000000B VOL: 0
+;PCODE: $0000000C VOL: 0
+;#include <delay.h>  //딜레이 사용
+;
+;
+;unsigned char fnd[10] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xd8,0x80,0x90};  //0~9까지
+
+	.DSEG
+;unsigned char fnd_ch[4] = {0xfe,0xfd,0xfb,0xf7};    //fnd 선택 변수
+;unsigned char n1 = 0, n10 = 0, n100 = 0, n1000 = 0;     //자리수 지정 변수
+;unsigned char status = 0;   //fnd 선택변경을 위한 변수
+;
+;#define SW1 PINB.0  //sw1 을 PINB1 로 이용
+;#define SW2 PINB.1  //sw2 을 PINB2 로 이용
+;
+;void outpost()
+; 0000 000E {
+
+	.CSEG
+;PCODE: $0000000D VOL: 0
+;PCODE: $0000000E VOL: 0
+; 0000 000F     PORTC=fnd[n1%10];      //1의 자리수 출력
+;PCODE: $0000000F VOL: 0
+;PCODE: $00000010 VOL: 0
+;PCODE: $00000011 VOL: 0
+;PCODE: $00000012 VOL: 0
+;PCODE: $00000013 VOL: 0
+;PCODE: $00000014 VOL: 0
+;PCODE: $00000015 VOL: 0
+; 0000 0010     PORTF=fnd_ch[0];    //FND1
+;PCODE: $00000016 VOL: 0
+;PCODE: $00000017 VOL: 0
+; 0000 0011     delay_ms(1);    //지연시간
+;PCODE: $00000018 VOL: 0
+;PCODE: $00000019 VOL: 0
+;PCODE: $0000001A VOL: 0
+; 0000 0012 
+; 0000 0013     PORTC=fnd[n10%10];     //10의 자리수 출력
+;PCODE: $0000001B VOL: 0
+;PCODE: $0000001C VOL: 0
+;PCODE: $0000001D VOL: 0
+;PCODE: $0000001E VOL: 0
+;PCODE: $0000001F VOL: 0
+;PCODE: $00000020 VOL: 0
+;PCODE: $00000021 VOL: 0
+; 0000 0014     PORTF=fnd_ch[1];    //FND2
+;PCODE: $00000022 VOL: 0
+;PCODE: $00000023 VOL: 0
+;PCODE: $00000024 VOL: 0
+; 0000 0015     delay_ms(1);    //지연시간
+;PCODE: $00000025 VOL: 0
+;PCODE: $00000026 VOL: 0
+;PCODE: $00000027 VOL: 0
+; 0000 0016 
+; 0000 0017     PORTC=fnd[n100%10];    //100의 자리수 출력
+;PCODE: $00000028 VOL: 0
+;PCODE: $00000029 VOL: 0
+;PCODE: $0000002A VOL: 0
+;PCODE: $0000002B VOL: 0
+;PCODE: $0000002C VOL: 0
+;PCODE: $0000002D VOL: 0
+;PCODE: $0000002E VOL: 0
+; 0000 0018     PORTF=fnd_ch[2];    //FND3
+;PCODE: $0000002F VOL: 0
+;PCODE: $00000030 VOL: 0
+;PCODE: $00000031 VOL: 0
+; 0000 0019     delay_ms(1);    //지연시간
+;PCODE: $00000032 VOL: 0
+;PCODE: $00000033 VOL: 0
+;PCODE: $00000034 VOL: 0
+; 0000 001A 
+; 0000 001B     PORTC=fnd[n1000%10];    //1000의 자리수 출력
+;PCODE: $00000035 VOL: 0
+;PCODE: $00000036 VOL: 0
+;PCODE: $00000037 VOL: 0
+;PCODE: $00000038 VOL: 0
+;PCODE: $00000039 VOL: 0
+;PCODE: $0000003A VOL: 0
+;PCODE: $0000003B VOL: 0
+; 0000 001C     PORTF=fnd_ch[3];    //FND4
+;PCODE: $0000003C VOL: 0
+;PCODE: $0000003D VOL: 0
+;PCODE: $0000003E VOL: 0
+; 0000 001D     delay_ms(1);    //지연시간
+;PCODE: $0000003F VOL: 0
+;PCODE: $00000040 VOL: 0
+;PCODE: $00000041 VOL: 0
+; 0000 001E 
+; 0000 001F     PORTF = 0xff;   //버튼을 누르면 fnd가 다 꺼짐
+;PCODE: $00000042 VOL: 0
+;PCODE: $00000043 VOL: 0
+; 0000 0020 
+; 0000 0021 }
+;PCODE: $00000044 VOL: 0
+;PCODE: $00000045 VOL: 0
+;
+;void main(void)
+; 0000 0024 {
+;PCODE: $00000046 VOL: 0
+; 0000 0025     DDRC = 0xff;    //포트 C 출력설정
+;PCODE: $00000047 VOL: 0
+;PCODE: $00000048 VOL: 0
+; 0000 0026     DDRD = 0x00;    //포트 D 출력설정
+;PCODE: $00000049 VOL: 0
+;PCODE: $0000004A VOL: 0
+; 0000 0027     DDRF = 0xff;    //포트 F 출력설정
+;PCODE: $0000004B VOL: 0
+;PCODE: $0000004C VOL: 0
+; 0000 0028 
+; 0000 0029     while (1)
+;PCODE: $0000004D VOL: 0
+; 0000 002A     {
+; 0000 002B         outpost();  //사용자 정의 함수
+;PCODE: $0000004E VOL: 0
+; 0000 002C 
+; 0000 002D         if(SW1==0){    //SW1눌리면
+;PCODE: $0000004F VOL: 0
+;PCODE: $00000050 VOL: 0
+;PCODE: $00000051 VOL: 0
+; 0000 002E             delay_ms(50);   //지연시간
+;PCODE: $00000052 VOL: 0
+;PCODE: $00000053 VOL: 0
+;PCODE: $00000054 VOL: 0
+; 0000 002F 
+; 0000 0030             while(SW1!=1);  //SW1이 눌린 동안 동작 안하고, 떼면 동작
+;PCODE: $00000055 VOL: 0
+;PCODE: $00000056 VOL: 0
+;PCODE: $00000057 VOL: 0
+;PCODE: $00000058 VOL: 0
+;PCODE: $00000059 VOL: 0
+;PCODE: $0000005A VOL: 0
+; 0000 0031 
+; 0000 0032             switch (status%4+1)    //현재 자리수 변수값에 따라
+;PCODE: $0000005B VOL: 0
+;PCODE: $0000005C VOL: 0
+;PCODE: $0000005D VOL: 0
+;PCODE: $0000005E VOL: 0
+;PCODE: $0000005F VOL: 0
+; 0000 0033             {
+; 0000 0034                 case 1: n1 = n1+1; break;   //1인경우 1의 자리수를 +1
+;PCODE: $00000060 VOL: 0
+;PCODE: $00000061 VOL: 0
+;PCODE: $00000062 VOL: 0
+;PCODE: $00000063 VOL: 0
+; 0000 0035                 case 2: n10 = n10+1; break;   //2인경우 10의 자리수를 +1
+;PCODE: $00000064 VOL: 0
+;PCODE: $00000065 VOL: 0
+;PCODE: $00000066 VOL: 0
+;PCODE: $00000067 VOL: 0
+;PCODE: $00000068 VOL: 0
+; 0000 0036                 case 3: n100 = n100+1; break;   //3인경우 100의 자리수를 +1
+;PCODE: $00000069 VOL: 0
+;PCODE: $0000006A VOL: 0
+;PCODE: $0000006B VOL: 0
+;PCODE: $0000006C VOL: 0
+;PCODE: $0000006D VOL: 0
+; 0000 0037                 case 4: n1000 = n1000+1; break;   //4인경우 1000의 자리수를 +1
+;PCODE: $0000006E VOL: 0
+;PCODE: $0000006F VOL: 0
+;PCODE: $00000070 VOL: 0
+;PCODE: $00000071 VOL: 0
+;PCODE: $00000072 VOL: 0
+; 0000 0038 
+; 0000 0039                 default: break;
+;PCODE: $00000073 VOL: 0
+;PCODE: $00000074 VOL: 0
+; 0000 003A             }
+;PCODE: $00000075 VOL: 0
+; 0000 003B         }
+; 0000 003C         if(SW2==0){   //SW2이 눌리면
+;PCODE: $00000076 VOL: 0
+;PCODE: $00000077 VOL: 0
+;PCODE: $00000078 VOL: 0
+;PCODE: $00000079 VOL: 0
+; 0000 003D             delay_ms(50);   //지연시간
+;PCODE: $0000007A VOL: 0
+;PCODE: $0000007B VOL: 0
+;PCODE: $0000007C VOL: 0
+; 0000 003E 
+; 0000 003F             while(SW2!=1);     //SW2가 눌린 동안 동작을 안하고, 떼면 동작
+;PCODE: $0000007D VOL: 0
+;PCODE: $0000007E VOL: 0
+;PCODE: $0000007F VOL: 0
+;PCODE: $00000080 VOL: 0
+;PCODE: $00000081 VOL: 0
+;PCODE: $00000082 VOL: 0
+; 0000 0040             status = status + 1;    //자리수 위치 +1
+;PCODE: $00000083 VOL: 0
+; 0000 0041         }
+; 0000 0042     }
+;PCODE: $00000084 VOL: 0
+;PCODE: $00000085 VOL: 0
+;PCODE: $00000086 VOL: 0
+; 0000 0043 }
+;PCODE: $00000087 VOL: 0
+;PCODE: $00000088 VOL: 0
+;PCODE: $00000089 VOL: 0

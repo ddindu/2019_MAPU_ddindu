@@ -1,0 +1,5 @@
+main DSTACK_USAGE:4 DSTACK_LEVEL:4 FILE:"201_03_057.c" LINE:17
+lcd_puts DSTACK_USAGE:3 DSTACK_LEVEL:7 FILE:"C:\cvavreval\lib\lcd.lib" LINE:214
+lcd_putchar DSTACK_USAGE:1 DSTACK_LEVEL:8 FILE:"C:\cvavreval\lib\lcd.lib" LINE:182
+lcd_gotoxy DSTACK_USAGE:2 DSTACK_LEVEL:10 FILE:"C:\cvavreval\lib\lcd.lib" LINE:162
+_lcd_write_data DSTACK_USAGE:1 DSTACK_LEVEL:11 FILE:"C:\cvavreval\lib\lcd.lib" LINE:81

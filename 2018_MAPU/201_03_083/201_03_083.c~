@@ -1,0 +1,48 @@
+/*
+ * 201_03_083.c
+ *
+ * Created: 2018-12-20 오후 1:39:33
+ * Author: Administrator
+ */
+
+#include <mega128a.h>
+#include <delay.h>
+
+char seg_pat[16] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xd8,0x80,0x98,0x88,0x83,0xc6,0xa1,0x86,0x8e};
+char n1=0,n10=0,n100=0,n1000=0;
+char pos = 0;
+char hour = 0,min=0,sec=0;
+char cnt=0;
+
+void time_out(void);
+
+void main(void)
+{
+    DDRA = 0xff;
+    DDRB = 0xff;
+    
+    //인터럽트 초기화
+    EICRB = 0b00101010;
+    EIMSK = 0b01110000;
+    
+    TIMSK = 0x01;
+    TCCR0 = 0x07;
+    TCNT0 = 0x00;
+    SREG = 0x80;
+while (1)
+    {
+    time_out();
+    if(cnt>=61){
+        cnt=0;
+        sec=sec+1;
+        if(sec==60){
+            sec=0;
+            min=min+1;
+            if(min==60){
+                min=0;
+                hour=(hour+1)%24
+                }
+            }
+        }
+    }
+}

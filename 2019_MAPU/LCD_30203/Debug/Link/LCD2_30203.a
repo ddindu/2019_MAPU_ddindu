@@ -1,0 +1,89 @@
+;
+;#include <mega128a.h>   //atmega128을 사용하기 위함
+;PCODE: $00000000 VOL: 0
+	#ifndef __SLEEP_DEFINED__
+;PCODE: $00000001 VOL: 0
+	#define __SLEEP_DEFINED__
+;PCODE: $00000002 VOL: 0
+	.EQU __se_bit=0x20
+;PCODE: $00000003 VOL: 0
+	.EQU __sm_mask=0x1C
+;PCODE: $00000004 VOL: 0
+	.EQU __sm_powerdown=0x10
+;PCODE: $00000005 VOL: 0
+	.EQU __sm_powersave=0x18
+;PCODE: $00000006 VOL: 0
+	.EQU __sm_standby=0x14
+;PCODE: $00000007 VOL: 0
+	.EQU __sm_ext_standby=0x1C
+;PCODE: $00000008 VOL: 0
+	.EQU __sm_adc_noise_red=0x08
+;PCODE: $00000009 VOL: 0
+	.SET power_ctrl_reg=mcucr
+;PCODE: $0000000A VOL: 0
+	#endif
+;PCODE: $0000000B VOL: 0
+;PCODE: $0000000C VOL: 0
+;
+;#asm
+;PCODE: $0000000D VOL: 0
+    .equ __lcd_port=0x1b    //lcd 를 포트A로 사용
+;PCODE: $0000000E VOL: 0
+;PCODE: $0000000F VOL: 0
+; 0000 0006 #endasm
+;
+;#include <lcd.h>    //lcd 함수
+;#include <delay.h>  //delay 함수
+;
+;void main(void){
+; 0000 000B void main(void){
+
+	.CSEG
+;PCODE: $00000010 VOL: 0
+; 0000 000C     lcd_init(16);   //lcd 모듈의 초기화함수
+;PCODE: $00000011 VOL: 0
+;PCODE: $00000012 VOL: 0
+; 0000 000D     while (1){
+;PCODE: $00000013 VOL: 0
+; 0000 000E             lcd_gotoxy(0,0);    //글자가 나올 위치 선정
+;PCODE: $00000014 VOL: 0
+;PCODE: $00000015 VOL: 0
+;PCODE: $00000016 VOL: 0
+;PCODE: $00000017 VOL: 0
+; 0000 000F             lcd_putsf("ddindu");    //ddindu 출력
+;PCODE: $00000018 VOL: 0
+;PCODE: $00000019 VOL: 0
+;PCODE: $0000001A VOL: 0
+; 0000 0010             _lcd_ready();   //lcd 모듈이 데이터 수신을 위한 준비
+;PCODE: $0000001B VOL: 0
+; 0000 0011             delay_ms(500);  //0.5초 딜레이
+;PCODE: $0000001C VOL: 0
+;PCODE: $0000001D VOL: 0
+; 0000 0012             _lcd_write_data(0x1c);  //표시화면 전체를 우측으로 시프트
+;PCODE: $0000001E VOL: 0
+;PCODE: $0000001F VOL: 0
+; 0000 0013             delay_ms(500);  //0.5초 딜레이
+;PCODE: $00000020 VOL: 0
+;PCODE: $00000021 VOL: 0
+; 0000 0014             _lcd_write_data(0x18);  //표시화면 전체를 좌측으로 시프트
+;PCODE: $00000022 VOL: 0
+;PCODE: $00000023 VOL: 0
+; 0000 0015             delay_ms(500);  //0.5초 딜레이
+;PCODE: $00000024 VOL: 0
+;PCODE: $00000025 VOL: 0
+; 0000 0016             _lcd_write_data(0x08);  //화면표시off, 커서표시 x, 커서 위치에 있는 문자 점멸 x
+;PCODE: $00000026 VOL: 0
+;PCODE: $00000027 VOL: 0
+; 0000 0017             delay_ms(500);  //0.5초 딜레이
+;PCODE: $00000028 VOL: 0
+;PCODE: $00000029 VOL: 0
+; 0000 0018             _lcd_write_data(0x0f);  //화면표시on, 커서표시, 커서 위치에 있는 문자 점멸
+;PCODE: $0000002A VOL: 0
+;PCODE: $0000002B VOL: 0
+; 0000 0019     }
+;PCODE: $0000002C VOL: 0
+;PCODE: $0000002D VOL: 0
+; 0000 001A }
+;PCODE: $0000002E VOL: 0
+;PCODE: $0000002F VOL: 0
+;PCODE: $00000030 VOL: 0

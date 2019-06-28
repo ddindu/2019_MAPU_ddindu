@@ -1,0 +1,159 @@
+/*
+ * 201_03_074.c
+ *
+ * Created: 2018-12-06 ¿ÀÈÄ 2:51:22
+ * Author: Administrator
+ */
+
+#include <mega128a.h>
+#include <delay.h>
+
+#asm
+    .equ __lcd_port = 0x15
+#endasm
+
+#include <lcd.h>
+
+int KeyMatrix();
+
+typedef unsigned char byte;
+flash byte char0[24]=
+{0x01,0x09,0x15,0x15,0x09,0x01,0x01,0x01,
+ 0x1d,0x0b,0x0b,0x1d,0x01,0x0e,0x0a,0x0e,
+ 0x09,0x1d,0x09,0x15,0x15,0x09,0x1d,0x09    
+};
+
+void define_char(byte flash *pc,byte char_code){
+    byte i,a;
+    a=char_code | 0x40;
+    for(i=0;i<24;i++) lcd_write_byte(a++,*pc++);
+}
+
+void main(void)
+{
+    int keyx;
+    lcd_init(16);
+    DDRC = 0xff;
+    PORTC = 0xff;
+    DDRD = 0x0f;
+    PORTD = 0x00;
+    
+while (1)
+    {
+        keyx = KeyMatrix();
+        
+        if(keyx == 0) {
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(0,0);
+            lcd_puts("0");
+        }
+        else if(keyx == 1){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(1,0);
+            lcd_puts("1");
+        }  
+         else if(keyx == 2){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(2,0);
+            lcd_puts("2");
+        } 
+         else if(keyx == 3){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(3,0);
+            lcd_puts("3");
+        } 
+         else if(keyx == 4){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(4,0);
+            lcd_puts("4");
+        } 
+         else if(keyx == 5){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(5,0);
+            lcd_puts("5");
+        } 
+         else if(keyx == 6){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(6,0);
+            lcd_puts("6");
+        } 
+         else if(keyx == 7){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(7,0);
+            lcd_puts("7");
+        } 
+         else if(keyx == 8){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(8,0);
+            lcd_puts("8");
+        } 
+         else if(keyx == 9){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(9,0);
+            lcd_puts("9");
+        } 
+         else if(keyx == 10){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(10,0);
+            lcd_puts("A");
+        } 
+         else if(keyx == 11){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(11,0);
+            lcd_puts("B");
+        } 
+         else if(keyx == 12){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(12,0);
+            lcd_puts("C");
+        } 
+        else if(keyx == 13){
+            lcd_clear();
+            delay_ms(2);
+            lcd_gotoxy(13,0);
+            lcd_puts("D");
+        }                
+        else if(keyx == 14){
+            define_char(char0,0);
+            lcd_gotoxy(0,1);
+            lcd_putchar(0);
+            lcd_gotoxy(1,1);
+            lcd_putchar(1);
+            lcd_gotoxy(2,1);
+            lcd_putchar(2);
+        }              
+        else lcd_clear();
+    }
+}
+
+int KeyMatrix(){
+    static unsigned char key = 0;
+    int keyout = 0xfe;
+    int i;
+    for(i=0;i<=3;i++){
+        PORTD = keyout;
+        delay_ms(1);
+        switch (PIND & 0xf0)
+               {
+               case 0x70: key = 0+i; break;
+               case 0xB0: key = 4+i; break;
+               case 0xD0: key = 8+i; break;
+               case 0xE0: key = 12+i; break;               
+               }
+        keyout = (keyout << 1 ) + 0x01;
+    }                                  
+    return key;
+}

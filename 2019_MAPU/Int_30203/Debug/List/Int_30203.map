@@ -1,0 +1,25 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+fnd                                                                               0x0500      16
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+led_1                                                                             R5           1
+led_2                                                                             R4           1
+i                                                                                 R6,R7        2
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+ext_int0_isr                                                                      0x00087     13
+ext_int2_isr                                                                      0x00094     13
+ext_int4_isr                                                                      0x000A1     22
+ext_int6_isr                                                                      0x000B7     29
+ext_int7_isr                                                                      0x000D4      5
+main                                                                              0x000D9     22

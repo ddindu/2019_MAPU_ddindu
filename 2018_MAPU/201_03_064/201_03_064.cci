@@ -1,0 +1,12 @@
+VERSION:3 SOURCE_TIMESTAMP:4D848C45
+NODE:I LEVEL:0 LINE:8 "C:\cvavreval\inc\mega128a.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavreval\inc\delay.h"
+NODE:I LEVEL:0 LINE:10 "C:\cvavreval\inc\io.h"
+NODE:I LEVEL:0 LINE:16 "C:\cvavreval\inc\lcd.h"
+NODE:I LEVEL:0 LINE:17 "C:\cvavreval\inc\stdio.h"
+NODE:T LEVEL:0 LINE:19 "hangul"
+NODE:V LEVEL:0 LINE:21 "font_0 -> RAM:????"
+NODE:V LEVEL:0 LINE:22 "font_1 -> RAM:????"
+NODE:V LEVEL:0 LINE:23 "font_2 -> RAM:????"
+NODE:F LEVEL:0 LINE:25 "define_char(hangul * pc,hangul char_code)"
+NODE:F LEVEL:0 LINE:34 "main(void)"

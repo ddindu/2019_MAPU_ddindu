@@ -1,0 +1,37 @@
+/*
+ * 201_03_052_1.c
+ *
+ * Created: 2018-10-25 ¿ÀÈÄ 4:04:29
+ * Author: Administrator
+ */
+
+#include <mega128a.h>
+#include <delay.h>
+
+#define Q0 PORTB.0
+#define Q1 PORTB.1
+#define Q2 PORTB.2
+#define Q3 PORTB.3
+#define Q4 PORTB.4
+#define Q5 PORTB.5
+
+unsigned char fnd[10] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xd8,0x80,0x98};
+int a=0,b=0,c=0,d=0,e=0,f=0,am=1,pm=0;
+int s=0,m=0,h=0,x;
+
+interrupt [EXT_INT0] void ext_int0(void)
+{
+    while(PIND.0 ==0){
+    delay.ms(1);
+    while(PIND
+    }
+}
+
+void main(void)
+{
+while (1)
+    {
+    // Please write your application code here
+
+    }
+}

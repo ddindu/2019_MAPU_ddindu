@@ -1,0 +1,18 @@
+/*
+ * 201_03_067.c
+ *
+ * Created: 2018-12-04 ¿ÀÈÄ 6:27:18
+ * Author: Administrator
+ */
+
+#include <mega128a.h>
+#include <delay.h>
+
+void main(void)
+{
+while (1)
+    {
+    // Please write your application code here
+
+    }
+}

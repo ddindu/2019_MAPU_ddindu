@@ -1,0 +1,31 @@
+#include <mega128a.h>
+#include <delay.h>
+
+#define SW1 PINB.1
+
+unsigned char led = 0x7f;
+
+int i=0;
+
+void main(void)
+{
+    DDRC = 0xff;
+    PORTC = 0xff;
+     
+    while (1)
+    {        
+        if(SW1==0)
+        {       
+            PORTC = led;    
+            led = led>>1|0x80;
+            delay_ms(100); 
+            i++;
+            if(i==8)
+            {
+                i=0;
+                led = 0x7f;
+            }               
+        }      
+      
+    }
+}

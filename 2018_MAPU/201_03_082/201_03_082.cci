@@ -1,0 +1,7 @@
+VERSION:3 SOURCE_TIMESTAMP:4E685A8B
+NODE:I LEVEL:0 LINE:8 "C:\cvavreval\inc\delay.h"
+NODE:I LEVEL:0 LINE:9 "C:\cvavreval\inc\mega128a.h"
+NODE:V LEVEL:0 LINE:11 "seg_pat -> RAM:????"
+NODE:F LEVEL:0 LINE:13 "timer2_ovf(void)"
+NODE:F LEVEL:0 LINE:22 "init(void)"
+NODE:F LEVEL:0 LINE:34 "main(void)"

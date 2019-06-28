@@ -1,0 +1,17 @@
+/*
+ * 201_03_052.c
+ *
+ * Created: 2018-11-01 ¿ÀÀü 11:43:46
+ * Author: Administrator
+ */
+
+#include <mega128a.h>
+
+void main(void)
+{
+while (1)
+    {
+    // Please write your application code here
+
+    }
+}
